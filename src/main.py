@@ -32,8 +32,15 @@ while(1 <= choice <= 2 and stop_program == False):
         brute_points = quadratic_bezier(ctrl1, ctrl2, ctrl3, num_points)
         end_brute = time.time()
 
-        print("Waktu eksekusi Divide and Conquer:", end_dnc-start_dnc , "ms")
-        print("Waktu eksekusi Brute Force:", end_brute-start_brute, "ms")
+        print()
+        print("Waktu eksekusi Divide and Conquer:", (end_dnc-start_dnc)*1000, "ms")
+        print("Waktu eksekusi Brute Force:", (end_brute-start_brute)*1000, "ms")
+
+        difference = abs((end_dnc-start_dnc)*1000 - (end_brute-start_brute)*1000)
+        if(difference >= 0):
+            print("Metode Divide and Conquer lebih cepat sebesar", difference, "ms")
+        else:
+            print("Metode Brute Force lebih cepat sebesar", difference, "ms")
 
         plot_bezier_curve(dnc_points)
         plot_curve(brute_points)
