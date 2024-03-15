@@ -1,5 +1,5 @@
 from Quadratic_Brute import quadratic_bezier, plot_curve
-from Quadratic_DnC import bezier_curve, plot_bezier_curve, Point
+from Quadratic_DnC import quadratic_bezier_curve, plot_bezier_curve, Point
 import time
 
 print("=======================================")
@@ -11,25 +11,29 @@ print("=======================================")
 choice = int(input("Choice: "))
 print("=======================================")
 stop_program = False
-while(1 <= choice <= 2 and stop_program == False):
+while(stop_program == False):
+    while(choice != 1 and choice != 2):
+        choice = int(input("Choice: "))
+        print("=======================================")
     if(choice == 1):
-        x1, y1 = input("Masukkan titik kontrol 1: ").split()
+        print("Input titik (x dan y dipisahkan oleh spasi)", end = "\n")
+        x1, y1 = input("Masukkan titik kontrol 1 (titik awal): ").split()
         x2, y2 = input("Masukkan titik kontrol 2 (titik kontrol tengah): ").split()
-        x3, y3 = input("Masukkan titik kontrol 3: ").split()
-        iterations = int(input("Masukkan jumlah iterasi: "))
+        x3, y3 = input("Masukkan titik kontrol 3 (titik akhir): ").split()
+        iteration = int(input("Masukkan jumlah iterasi: "))
 
-        ctrl1 = Point(float(x1), float(y1))
-        ctrl2 = Point(float(x2), float(y2)) #control point center
-        ctrl3 = Point(float(x3), float(y3))
+        point1 = Point(float(x1), float(y1))
+        point2 = Point(float(x2), float(y2)) #center control point
+        point3 = Point(float(x3), float(y3))
 
-        num_points = 2**iterations + 1
+        num_points = 2 ** iteration + 1
 
         start_dnc = time.time()
-        dnc_points = bezier_curve(ctrl1, ctrl2, ctrl3, iterations)
+        dnc_points = quadratic_bezier_curve(point1, point2, point3, iteration)
         end_dnc = time.time()
 
         start_brute = time.time()
-        brute_points = quadratic_bezier(ctrl1, ctrl2, ctrl3, num_points)
+        brute_points = quadratic_bezier(point1, point2, point3, num_points)
         end_brute = time.time()
 
         print()
