@@ -2,7 +2,6 @@ from typing import List
 from collections import namedtuple
 import matplotlib.pyplot as plt
 import numpy as np
-import time
 
 Point = namedtuple("Point", ["x", "y"])
 

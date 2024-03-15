@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import time
 from collections import namedtuple
 
 Point = namedtuple("Point", ["x", "y"])
