@@ -18,21 +18,38 @@
   </strong>
 </div>
 
+## Table of Contents
+  - [Table of Contents](#table-of-contents)
+  - [Divide and Conquer Implementation](#divide-and-conquer-implementation)
+  - [Program Features](#program-features)
+  - [Program Structure](#program-structure)
+  - [Module Used](#module-used)
+  - [Running The Program](#how-to-run)
+
 <!-- GENERAL INFORMATION -->
 ## Divide and Conquer Implementation
 This program implements the divide and conquer method to approximate points in the Bézier Curve. This is efficient because it reduces the number of evaluations needed to approximate the curve. By recursively dividing the curve into smaller segments and evaluating only the necessary points, we can achieve a good approximation of the Bezier curve with fewer computations compared to evaluating every point directly. Divide phase includes dividing the Bézier curve into two equal parts by finding the midpoint. Conquer phase includes recursively applying the same process to each subsegment until a certain number of iterations.
 
+## Program Features
+The features of our program:
+* Quadratic Bézier Curve and Nth Degree Bézier Curve
+* Divide and Conquer Algorithm + Execution Time + Number of distance calculation operations
+<!-- * Visualisation of midpoint algorithm iterations -->
+* Bézier curve visualizer
 
 ## Program Structure
 
 ```
 ├── bin
+│   ├── main.exe
 ├── doc
+│   ├── Tucil2_13522062_13522063.pdf
 ├── src
 │   ├── main.py
 │   ├── Quadratic_Brute.py
 │   ├── Quadratic_DnC.py
 ├── test
+│   ├── 
 └── README.md
 ```
 
