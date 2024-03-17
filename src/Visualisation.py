@@ -84,7 +84,7 @@ def animate(iteration, control_points, ax1, ax2):
         if i == 0:
             ax1.plot(curve_x, curve_y, 'o-', label='Control Points')
         elif i != iteration:
-            ax1.plot(curve_x, curve_y, '-', label=f'Iteration {i}')
+            ax1.plot(curve_x, curve_y, '--', label=f'Iteration {i}')
         else:
             ax1.plot(curve_x, curve_y, 'o-', label=f'Divide and Conquer Bezier Curve')
 
