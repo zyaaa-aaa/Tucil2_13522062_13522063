@@ -1,4 +1,3 @@
-from typing import List
 from collections import namedtuple
 
 # inisialisasi new tuple dengan jenis point (x, y)

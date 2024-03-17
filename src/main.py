@@ -1,4 +1,3 @@
-from Quadratic_Brute import quadratic_bezier_brute
 from N_DnC import dnc_bezier_curve, Point
 from N_BF import bf_bezier_curve
 from Visualisation import *

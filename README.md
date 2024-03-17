@@ -46,7 +46,7 @@ The features of our program:
 │   ├── Tucil2_13522062_13522063.pdf
 ├── src
 │   ├── main.py
-│   ├── Quadratic_Brute.py
+│   ├── N_BF.py
 │   ├── N_DnC.py
 │   ├── Visualisation.py
 ├── test
@@ -56,7 +56,7 @@ The features of our program:
 
 ## Module Used
 1. matplotlib.pyplot
-2. numpy
+2. matplotlib.animation
 3. time
 4. collections
 5. typing
