@@ -1,29 +1,36 @@
 from Quadratic_Brute import quadratic_bezier_brute
-from N_DnC import bezier_curve, Point
+from N_DnC import dnc_bezier_curve, Point
+from N_BF import bf_bezier_curve
 from Visualisation import *
+from matplotlib.animation import FuncAnimation
 import time
 
 print("=======================================")
 print("              Bezier Curve             ")
 print("=======================================")
-print("1. Quadratic")
-print("2. Nth Degree")
-print("3. Exit")
+print("1. Nth Degree")
+print("2. Exit")
 print("=======================================")
 choice = int(input("Choice: "))
 print("=======================================")
 stop_program = False
 while(stop_program == False):
     while(choice != 1 and choice != 2):
+        print("=======================================")
+        print("              Bezier Curve             ")
+        print("=======================================")
+        print("1. Nth Degree")
+        print("2. Exit")
+        print("=======================================")
         choice = int(input("Choice: "))
         print("=======================================")
-    if(choice == 1 or choice == 2):
+
+    if(choice == 1):
+        jumlah_titik = int(input("Masukkan jumlah titik: "))
+
         print("Input titik (x dan y dipisahkan oleh spasi). Titik dimulai dengan titik awal dan diakhiri dengan titik akhir (berurutan).")
         print("Contoh: 0 0")
-        if(choice == 1):
-            jumlah_titik = 3
-        if (choice == 2):
-            jumlah_titik = int(input("Masukkan jumlah titik: "))
+
         control_points = []
         for i in range(jumlah_titik):
             while True:
@@ -35,42 +42,46 @@ while(stop_program == False):
                 except ValueError:
                     print("Input harus berupa dua angka yang dipisahkan oleh spasi.")
                     continue  # ulangi minta input
+
         iteration = int(input("Masukkan jumlah iterasi: "))
+        num_points = 2 ** iteration + 1
+          
+        start_dnc = time.time()
+        dnc_points = dnc_bezier_curve(control_points, iteration)
+        end_dnc = time.time()
 
-        if (choice == 1):
-            num_points = 2 ** iteration + 1
+        start_bf = time.time()
+        bf_points = bf_bezier_curve(control_points, num_points)
+        end_bf = time.time()
 
-            start_dnc = time.time()
-            dnc_points = bezier_curve(control_points, iteration)
-            end_dnc = time.time()
+        print()
+        print("Waktu eksekusi Divide and Conquer:", (end_dnc-start_dnc)*1000, "ms")
+        print("Waktu eksekusi Brute Force:", (end_bf-start_bf)*1000, "ms")
 
-            start_brute = time.time()
-            brute_points = quadratic_bezier_brute(control_points[0], control_points[1], control_points[2], num_points)
-            end_brute = time.time()
+        if (end_bf-start_bf) > (end_dnc-start_dnc):
+            print("Divide and Conquer lebih cepat dari Brute Force sebesar", (end_bf-start_bf)-(end_dnc-start_dnc)*1000, "ms")
+        else:
+            print("Brute Force lebih cepat dari Divide and Conquer sebesar", (end_dnc-start_dnc)-(end_bf-start_bf)*1000, "ms")
+        
+        # Animation
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+        ani = FuncAnimation(fig, animate, frames=range(iteration + 1),fargs=(control_points, ax1, ax2), interval=350,repeat=False)
+        plt.show()
 
-            print()
-            print("Waktu eksekusi Divide and Conquer:", (end_dnc-start_dnc)*1000, "ms")
-            print("Waktu eksekusi Brute Force:", (end_brute-start_brute)*1000, "ms")
+        # Final Result Visualisation
+        plot_dnc_bezier_curve(control_points, jumlah_titik)
+        plot_bf_bezier_curve(control_points, num_points)
 
-            difference = (end_dnc-start_dnc)*1000 - (end_brute-start_brute)*1000
-            if(difference >= 0):
-                print("Metode Divide and Conquer lebih cepat sebesar", difference, "ms")
-            else:
-                print("Metode Brute Force lebih cepat sebesar", abs(difference), "ms")
-
-            plot_quadratic_bezier(dnc_points, brute_points)
-        if(choice == 2):
-            start_dnc = time.time()
-            dnc_points = bezier_curve(control_points, iteration)
-            end_dnc = time.time()
-
-            print()
-            print("Waktu eksekusi Divide and Conquer:", (end_dnc-start_dnc)*1000, "ms")
-            plot_n_bezier(dnc_points, jumlah_titik)
+        print("=======================================")
+        print("              Bezier Curve             ")
+        print("=======================================")
+        print("1. Nth Degree")
+        print("2. Exit")
         print("=======================================")
         choice = int(input("Choice: "))
         print("=======================================")
-    if(choice == 3):
+
+    if(choice == 2):
         stop_program = True
         print("=======================================")
         print("              Thank You!               ")

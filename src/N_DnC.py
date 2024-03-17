@@ -9,7 +9,7 @@ def mid_point(point1: Point, point2: Point) -> Point:
         return Point((point1.x + point2.x) / 2, (point1.y + point2.y) / 2)
 
 # mencari titik-titik pembentuk kurva bezier dengan konsep midpoint algorithm
-def bezier_curve(control_points: list[Point], iterations: int) -> list[Point]:
+def dnc_bezier_curve(control_points: list[Point], iterations: int) -> list[Point]:
     initial = control_points.copy()
     titik_awal = control_points[0]
     titik_akhir = control_points[-1]
@@ -47,9 +47,9 @@ def bezier_curve(control_points: list[Point], iterations: int) -> list[Point]:
         mid_points = initial[0]
         
         # divide bagi kiri, tengah, kanan
-        left = bezier_curve(kiri, iterations - 1)
+        left = dnc_bezier_curve(kiri, iterations - 1)
         middle = [mid_points]
-        right = bezier_curve(kanan, iterations - 1)
+        right = dnc_bezier_curve(kanan, iterations - 1)
         
         # conquer (gabungin)
         return left + middle + right
