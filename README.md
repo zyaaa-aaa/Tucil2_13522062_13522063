@@ -33,7 +33,7 @@ This program implements the divide and conquer method to approximate points in t
 ## Program Features
 The features of our program:
 * Quadratic Bézier Curve and Nth Degree Bézier Curve
-* Divide and Conquer Algorithm + Execution Time + Number of distance calculation operations
+* Divide and Conquer Algorithm + Execution Time
 <!-- * Visualisation of midpoint algorithm iterations -->
 * Bézier curve visualizer
 
@@ -47,7 +47,8 @@ The features of our program:
 ├── src
 │   ├── main.py
 │   ├── Quadratic_Brute.py
-│   ├── Quadratic_DnC.py
+│   ├── N_DnC.py
+│   ├── Visualisation.py
 ├── test
 │   ├── 
 └── README.md
