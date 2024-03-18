@@ -31,8 +31,8 @@ while(stop_program == False):
                     continue  # ulangi minta input
 
         iteration = int(input("Masukkan jumlah iterasi: "))
-        num_points = 2 ** iteration + 1
-          
+        num_points = (2 ** iteration) + 1
+    
         start_dnc = time.time()
         dnc_points = dnc_bezier_curve(control_points, iteration)
         end_dnc = time.time()

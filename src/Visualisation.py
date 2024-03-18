@@ -22,8 +22,7 @@ def interpolate_vis(control_points: List[Point_N], t: float) -> Point_N:
 
 def bf_bezier_curve_interpolate_vis(control_points: List[Point_N], num_points: int) -> List[Point_N]:
     bezier_points = []
-    for i in range(num_points):
-        t = i / (num_points - 1)
+    for t in np.linspace(0, 1, num_points):
         bezier_point = interpolate_vis(control_points, t)
         bezier_points.append(bezier_point)
     
