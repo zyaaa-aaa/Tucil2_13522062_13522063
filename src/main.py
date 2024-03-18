@@ -1,28 +1,16 @@
 from N_DnC import dnc_bezier_curve, Point
 from N_BF import bf_bezier_curve
 from Visualisation import *
+from Input import *
 from matplotlib.animation import FuncAnimation
 import time
+import numpy as np
 
-print("=======================================")
-print("              Bezier Curve             ")
-print("=======================================")
-print("1. Nth Degree")
-print("2. Exit")
-print("=======================================")
-choice = int(input("Choice: "))
-print("=======================================")
+choice = input_main_menu()
 stop_program = False
 while(stop_program == False):
     while(choice != 1 and choice != 2):
-        print("=======================================")
-        print("              Bezier Curve             ")
-        print("=======================================")
-        print("1. Nth Degree")
-        print("2. Exit")
-        print("=======================================")
-        choice = int(input("Choice: "))
-        print("=======================================")
+        choice = input_main_menu()
 
     if(choice == 1):
         jumlah_titik = int(input("Masukkan jumlah titik: "))
@@ -53,32 +41,38 @@ while(stop_program == False):
         bf_points = bf_bezier_curve(control_points, num_points)
         end_bf = time.time()
 
-        print()
-        print("Waktu eksekusi Divide and Conquer:", (end_dnc-start_dnc)*1000, "ms")
-        print("Waktu eksekusi Brute Force:", (end_bf-start_bf)*1000, "ms")
+        dnc_time = np.float16(end_dnc-start_dnc)*1000
+        bf_time = np.float16(end_bf-start_bf)*1000
 
-        if (end_bf-start_bf) > (end_dnc-start_dnc):
-            print("Divide and Conquer lebih cepat dari Brute Force sebesar", (end_bf-start_bf)-(end_dnc-start_dnc)*1000, "ms")
+        print()
+        print("Waktu eksekusi Divide and Conquer:", dnc_time, "ms")
+        print("Waktu eksekusi Brute Force:", bf_time, "ms")
+
+        if bf_time > dnc_time:
+            print("Divide and Conquer lebih cepat dari Brute Force sebesar", bf_time-dnc_time, "ms")
         else:
-            print("Brute Force lebih cepat dari Divide and Conquer sebesar", (end_dnc-start_dnc)-(end_bf-start_bf)*1000, "ms")
+            print("Brute Force lebih cepat dari Divide and Conquer sebesar", dnc_time-bf_time, "ms")
         
         # Animation
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
-        ani = FuncAnimation(fig, animate, frames=range(iteration + 1),fargs=(control_points, ax1, ax2), interval=350,repeat=False)
+        ani = FuncAnimation(fig, animate, frames=range(iteration + 1), fargs=(control_points, ax1, ax2), interval=350, repeat=False)
         plt.show()
 
         # Final Result Visualisation
-        plot_dnc_bezier_curve(control_points, jumlah_titik)
-        plot_bf_bezier_curve(control_points, num_points)
+        vis_choice = input_visualisation_menu()
+        while(vis_choice != 1 and vis_choice != 2 and vis_choice != 3):
+            vis_choice = input_visualisation_menu()
 
-        print("=======================================")
-        print("              Bezier Curve             ")
-        print("=======================================")
-        print("1. Nth Degree")
-        print("2. Exit")
-        print("=======================================")
-        choice = int(input("Choice: "))
-        print("=======================================")
+        while(vis_choice == 1 or vis_choice == 2):
+            if(vis_choice == 1):
+                plot_dnc_bezier_curve(control_points, jumlah_titik)
+                vis_choice = input_visualisation_menu()
+
+            if(vis_choice == 2):
+                plot_bf_bezier_curve(control_points, num_points)
+                vis_choice = input_visualisation_menu()
+                
+        choice = input_main_menu()
 
     if(choice == 2):
         stop_program = True

@@ -45,6 +45,7 @@ The features of our program:
 ├── doc
 │   ├── Tucil2_13522062_13522063.pdf
 ├── src
+│   ├── Input.py
 │   ├── main.py
 │   ├── N_BF.py
 │   ├── N_DnC.py
@@ -57,9 +58,10 @@ The features of our program:
 ## Module Used
 1. matplotlib.pyplot
 2. matplotlib.animation
-3. time
-4. collections
-5. typing
+3. numpy
+4. time
+5. collections
+6. typing
 
 
 ## How to Run
