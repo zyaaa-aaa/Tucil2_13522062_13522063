@@ -4,8 +4,7 @@
 
   <p align="center">
     <h3>Creating Bézier Curve with Divide and Conquer based Midpoint Algorithm</h3>
-<br>
-  </p>
+
 </div>
 
 <!-- CONTRIBUTOR -->

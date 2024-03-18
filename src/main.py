@@ -65,7 +65,7 @@ while(stop_program == False):
 
         while(vis_choice == 1 or vis_choice == 2):
             if(vis_choice == 1):
-                plot_dnc_bezier_curve(control_points, jumlah_titik)
+                plot_dnc_bezier_curve(control_points, iteration)
                 vis_choice = input_visualisation_menu()
 
             if(vis_choice == 2):

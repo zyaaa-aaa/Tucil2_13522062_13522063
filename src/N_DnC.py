@@ -9,46 +9,28 @@ def mid_point(point1: Point, point2: Point) -> Point:
 
 # mencari titik-titik pembentuk kurva bezier dengan konsep midpoint algorithm
 def dnc_bezier_curve(control_points: list[Point], iterations: int) -> list[Point]:
-    initial = control_points.copy()
-    titik_awal = control_points[0]
-    titik_akhir = control_points[-1]
+    # Recursion base
+    if iterations == 0:
+        return control_points.copy()
 
-    # recursion base
-    if iterations == 0 :
-        return initial
-    elif iterations == 1 :
-        initial = control_points.copy()
-        for i in range(len(control_points)) :
-            if (i != len(control_points) - 1):
-                temp = []
-                for j in range(len(initial) - 1):
-                    mid = mid_point(initial[j], initial[j+1])
-                    temp.append(mid)
-                initial = temp
-        mid_points = initial[0]
+    # Recursion iteration
+    kanan = [control_points[-1]]
+    kiri = [control_points[0]]
+    temp_points = control_points.copy()
 
-        return [titik_awal, mid_points, titik_akhir]
-    
-    # recursion iteration
-    else :
-        kanan = [titik_akhir]
-        kiri = [titik_awal]
-        
-        for i in range(len(control_points)):
-            if (i != len(control_points) - 1):
-                temp = []
-                for j in range(len(initial) - 1):
-                    mid = mid_point(initial[j], initial[j+1])
-                    temp.append(mid)
-                kanan.insert(0, temp[-1])
-                kiri.append(temp[0])
-                initial = temp
-        mid_points = initial[0]
-        
-        # divide bagi kiri, tengah, kanan
-        left = dnc_bezier_curve(kiri, iterations - 1)
-        middle = [mid_points]
-        right = dnc_bezier_curve(kanan, iterations - 1)
-        
-        # conquer (gabungin)
-        return left + middle + right
+    for _ in range(len(control_points) - 1):
+        temp = []
+        for j in range(len(temp_points) - 1):
+            mid = mid_point(temp_points[j], temp_points[j+1])
+            temp.append(mid)
+        kanan.insert(0, temp[-1])
+        kiri.append(temp[0])
+        temp_points = temp
+
+    mid_points = temp_points[0]
+
+    # Divide bagi kiri, tengah, kanan
+    left = dnc_bezier_curve(kiri, iterations - 1)
+    right = dnc_bezier_curve(kanan, iterations - 1)
+
+    return left + [mid_points] + right
